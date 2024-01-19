@@ -6,3 +6,106 @@
 //
 
 import Foundation
+
+
+struct Character: Decodable {
+    enum Status: String, Decodable {
+        case alive = "Alive"
+        case dead = "Dead"
+        case unknown
+    }
+    
+    enum Gender: String, Decodable {
+        case female = "Female"
+        case male = "Male"
+        case genderless = "Genderless"
+        case unknown
+    }
+    
+    struct Location: Decodable {
+        let name: String
+        let url: URL?
+        
+        private enum CodingKeys: String, CodingKey {
+            case name
+            case url
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            name = try container.decode(String.self, forKey: .name)
+
+            // Decode the URL, treating an empty string as a valid value
+            if let urlString = try? container.decode(String.self, forKey: .url) {
+                url = URL(string: urlString)
+            } else {
+                url = nil
+            }
+        }
+        
+        init(name: String, url: URL?) {
+            self.name = name
+            self.url = url
+        }
+    }
+    
+    let id: Int
+    let name: String
+    let status: Status
+    let species: String
+    let type: String
+    let gender: Gender
+    let origin: Location
+    let location: Location
+    let image: URL
+    let episode: [URL]
+    let url: CharacterURL
+    let created: Date
+    
+    public var firstApperance: String? {
+        guard let firstEpisodeURL = episode.first else { return nil }
+        guard let firstEpisode = EpisodeCache.shared.getEpisode(for: firstEpisodeURL) else { return firstEpisodeURL.episodeId.map { "Episode #\($0)" } }
+        return firstEpisode.name
+    }
+    
+    #if DEBUG
+    
+    static let rick = Character(id: 1,
+                                name: "Rick Sanchez",
+                                status: .alive,
+                                species: "Human",
+                                type: "",
+                                gender: .male,
+                                origin: Location(name: "Earth", url: URL(string:"https://rickandmortyapi.com/api/location/1")),
+                                location: Location(name: "Earth", url: URL(string:"https://rickandmortyapi.com/api/location/20")),
+                                image: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!,
+                                episode: [URL(string: "https://rickandmortyapi.com/api/episode/1")!, URL(string: "https://rickandmortyapi.com/api/episode/2")!],
+                                url: URL(string: "https://rickandmortyapi.com/api/character/1")!,
+                                created: Date(timeIntervalSince1970: TimeInterval(1515608441))
+    )
+    
+    #endif
+}
+
+protocol IdentifiableURL {
+    func identifier(for key: String) -> Int?
+}
+
+extension IdentifiableURL where Self == URL {
+    func identifier(for key: String) -> Int? {
+        guard let index = self.pathComponents.firstIndex(of: key), index + 1 < self.pathComponents.count else { return nil }
+        let identifierString = self.pathComponents[index + 1]
+        return Int(identifierString)
+    }
+}
+
+typealias CharacterURL = URL
+
+extension CharacterURL: IdentifiableURL {
+    var characterId: Int? {
+        identifier(for: "character")
+    }
+}
+
+
+

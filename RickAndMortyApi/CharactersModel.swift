@@ -8,23 +8,11 @@
 import Foundation
 import Combine
 
-struct PageResponse<T>: Decodable where T: Decodable   {
-    struct Info: Decodable {
-        let count: Int
-        let pages: Int
-        let next: URL?
-        let prev: URL?
-    }
-    let info: Info
-    let results: [T]
-}
 
-class CharactersModel: ObservableObject {
-    private let BASE_URL = "https://rickandmortyapi.com/api"
+class CharactersModel {
+    private let BASE_URL = "https://rickandmortyapi.com/api/"
     
     func requestPage(_ page: Int) async -> Result<PageResponse<Character>, Error> {
-        print("Request page \(page)")
-        
         guard let url = buildURL(forPage: page) else {
             return .failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil))
         }
@@ -32,6 +20,7 @@ class CharactersModel: ObservableObject {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let page = try self.jsonDecoder.decode(PageResponse<Character>.self, from: data)
+            
             await withTaskGroup(of: Void.self) { group in
                 for character in page.results {
                     group.addTask {
@@ -39,8 +28,8 @@ class CharactersModel: ObservableObject {
                     }
                 }
             }
-            return .success(page)
             
+            return .success(page)
         } catch(let error) {
             return .failure(error)
         }
@@ -68,12 +57,12 @@ class CharactersModel: ObservableObject {
     }
     
     private func buildURL(forPage page: Int) -> URL? {
-        var components = URLComponents(string: BASE_URL + "/character/")!
+        var components = URLComponents(string: BASE_URL + "character/")!
         components.queryItems = [URLQueryItem(name: "page", value: "\(page)")]
         return components.url
     }
     
-    private var jsonDecoder = {
+    private lazy var jsonDecoder = {
         let jsonDecoder = JSONDecoder()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"

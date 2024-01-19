@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct PageResponse<T>: Decodable where T: Decodable   {
+    struct Info: Decodable {
+        let count: Int
+        let pages: Int
+        let next: URL?
+        let prev: URL?
+    }
+    let info: Info
+    let results: [T]
+}

@@ -7,13 +7,14 @@
 
 import Foundation
 
+
 struct Episode: Decodable {
     let id: Int
     let name: String
     let airDate: String
     let episodeCode: String
     let characters: [URL]
-    let url: URL
+    let url: EpisodeURL
     let created: Date
 
     private enum CodingKeys: String, CodingKey {
@@ -24,5 +25,13 @@ struct Episode: Decodable {
         case characters
         case url
         case created
+    }
+}
+
+typealias EpisodeURL = URL
+
+extension EpisodeURL {
+    var episodeId: Int? {
+        identifier(for: "episode")
     }
 }
