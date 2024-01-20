@@ -8,12 +8,13 @@
 import SwiftUI
 
 
+enum PaginationState {
+    case idle
+    case loading
+    case error(Error)
+}
+
 struct PaginatedView<T, CardView: View>: View where T: Identifiable & Pageable, CardView: View {
-    private enum PaginationState {
-        case idle
-        case loading
-        case error(Error)
-    }
     
     let apiService: RickAndMortyAPIService
     let cardView: (T) -> CardView
@@ -28,33 +29,6 @@ struct PaginatedView<T, CardView: View>: View where T: Identifiable & Pageable, 
         return currentPage < maxPage
     }
     
-    var lastRowView: some View {
-        ZStack(alignment: .center) {
-            switch paginationState {
-            case .loading:
-                ProgressView()
-            case .idle:
-                EmptyView()
-            case .error(let error):
-                ErrorView(error: error)
-            }
-        }
-        .frame(height: 50)
-        .task {
-            paginationState = .loading
-            let result: Result<PageResponse<T>, Error> = await apiService.requestPage(currentPage + 1)
-            switch result {
-            case .success(let page):
-                currentPage += 1
-                maxPage = page.info.pages
-                pages.append(page)
-                paginationState = .idle
-            case .failure(let error):
-                paginationState = .error(error)
-            }
-        }
-    }
-    
     var body: some View {
         let items: [T] = self.pages.flatMap { $0.results }
         
@@ -64,7 +38,20 @@ struct PaginatedView<T, CardView: View>: View where T: Identifiable & Pageable, 
                     .listRowSeparator(.hidden)
             }
             if isMoreDataAvailable {
-                lastRowView
+                PaginatedLastRowView(paginationState: $paginationState)
+                    .task{
+                        paginationState = .loading
+                        let result: Result<PageResponse<T>, Error> = await apiService.requestPage(currentPage + 1)
+                        switch result {
+                        case .success(let page):
+                            currentPage += 1
+                            maxPage = page.info.pages
+                            pages.append(page)
+                            paginationState = .idle
+                        case .failure(let error):
+                            paginationState = .error(error)
+                        }
+                    }
             }
         }
         .refreshable {

@@ -28,14 +28,13 @@ struct Episode: Decodable, Identifiable {
     }
     
     public var cast: String {
-        let names = characters.reduce("") { partialResult, characterURL in
-            if let char = CharacterCache.shared.getCachedItem(for: characterURL) {
-                return partialResult + "\(char.name), "
-            } else {
-                return partialResult + "\(characterURL.absoluteString), "
-            }
+        let chars = self.characters.compactMap{ CharacterCache.shared.getCachedItem(for: $0) }
+        var cast = chars.reduce("") { $0 + "\($1.name), " }
+        cast = String(cast.dropLast(2)) //Remove last ", "
+        if chars.count != self.characters.count { //If not all self.characters were cached
+            cast = cast == "" ? "..." : cast + ", ..."
         }
-        return String(names.dropLast(2))
+        return cast
     }
     
 #if DEBUG

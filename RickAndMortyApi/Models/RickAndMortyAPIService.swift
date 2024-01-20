@@ -76,8 +76,7 @@ class RickAndMortyAPIService {
                             let subitem = try self.jsonDecoder.decode(T.Subitem.self, from: data)
                             cache.setItem(subitem, for: subitemURL)
                         } catch {
-                            // Handle error if needed
-                            print("Error fetching subitems data: \(error)")
+                            // No need to handle error here. We can't fetch subitem to cache it - will try another time.
                         }
                     }
                 }
