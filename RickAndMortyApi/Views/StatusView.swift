@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct StatusView: View {
     @State var character: Character
     

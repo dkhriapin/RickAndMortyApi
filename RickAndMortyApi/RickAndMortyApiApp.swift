@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct RickAndMortyApiApp: App {
+    let apiService = RickAndMortyAPIService()
     var body: some Scene {
         WindowGroup {
             TabView {
-                CharactersView()
+                CharactersView(apiService: apiService)
                     .tabItem { Label("Characters", systemImage: "person.fill") }
-                EpisodesView()
+                EpisodesView(apiService: apiService)
                     .tabItem { Label("Episodes", systemImage: "film") }
             }
         }

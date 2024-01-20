@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Character: Decodable {
+struct Character: Decodable, Identifiable {
     enum Status: String, Decodable {
         case alive = "Alive"
         case dead = "Dead"

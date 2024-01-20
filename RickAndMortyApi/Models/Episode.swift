@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Episode: Decodable {
+struct Episode: Decodable, Identifiable {
     let id: Int
     let name: String
     let airDate: String
