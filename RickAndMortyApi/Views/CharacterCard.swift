@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-
 struct CharacterCard: View {
     @State var character: Character
     @Environment(\.colorScheme) var colorScheme
@@ -77,3 +76,8 @@ struct CharacterCard: View {
 #Preview {
     CharacterCard(character: Character.rick)
 }
+
+#Preview {
+    CharacterCard(character: Character.StanLeeRick)
+}
+

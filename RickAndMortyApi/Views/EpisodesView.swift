@@ -1,24 +1,25 @@
 //
-//  ContentView.swift
+//  EpisodesView.swift
 //  RickAndMortyApi
 //
-//  Created by Dmytro Khriapin on 18/01/2024.
+//  Created by Dmytro Khriapin on 19/01/2024.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+
+struct EpisodesView: View {
     private enum PaginationState {
         case idle
         case loading
         case error(Error)
     }
     
-    let charactersModel = CharactersModel()
+    let apiService = RickAndMortyAPIService()
     @State private var currentPage: Int = 0
     @State private var maxPage: Int?
     @State private var paginationState: PaginationState = .idle
-    @State private var pages: [PageResponse<Character>] = []
+    @State private var pages: [PageResponse<Episode>] = []
     
     private var isMoreDataAvailable: Bool {
         guard let maxPage = maxPage else { return true }
@@ -39,7 +40,7 @@ struct ContentView: View {
         .frame(height: 50)
         .task {
             paginationState = .loading
-            let result = await charactersModel.requestPage(currentPage + 1)
+            let result = await apiService.requestEpisodesPage(currentPage + 1)
             switch result {
             case .success(let page):
                 currentPage += 1
@@ -54,12 +55,13 @@ struct ContentView: View {
     }
     
     var body: some View {
-        var characters: [Character] {
+        var episodes: [Episode] {
             self.pages.flatMap{ $0.results }
         }
         List() {
-            ForEach(characters, id: \.id) { character in
-                CharacterCard(character: character)
+            ForEach(episodes, id: \.id) { episode in
+                EpisodeCard(episode: episode)
+                    .listRowSeparator(.hidden)
             }
             if isMoreDataAvailable {
                 lastRowView
@@ -69,11 +71,11 @@ struct ContentView: View {
             pages = []
             currentPage = 0
         }
-        .listStyle(.grouped)
+//        .listStyle(.grouped)
     }
 }
 
 
 #Preview {
-    ContentView()
+    EpisodesView()
 }

@@ -34,7 +34,7 @@ struct Character: Decodable {
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             name = try container.decode(String.self, forKey: .name)
-
+            
             // Decode the URL, treating an empty string as a valid value
             if let urlString = try? container.decode(String.self, forKey: .url) {
                 url = URL(string: urlString)
@@ -64,11 +64,11 @@ struct Character: Decodable {
     
     public var firstApperance: String? {
         guard let firstEpisodeURL = episode.first else { return nil }
-        guard let firstEpisode = EpisodeCache.shared.getEpisode(for: firstEpisodeURL) else { return firstEpisodeURL.episodeId.map { "Episode #\($0)" } }
+        guard let firstEpisode = EpisodeCache.shared.getCachedItem(for: firstEpisodeURL) else { return firstEpisodeURL.episodeId.map { "Episode #\($0)" } }
         return firstEpisode.name
     }
     
-    #if DEBUG
+#if DEBUG
     
     static let rick = Character(id: 1,
                                 name: "Rick Sanchez",
@@ -84,7 +84,21 @@ struct Character: Decodable {
                                 created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
     
-    #endif
+    static let StanLeeRick = Character(id: 810,
+                                       name: "Stan Lee Rick",
+                                       status: .unknown,
+                                       species: "Human",
+                                       type: "",
+                                       gender: .male,
+                                       origin: Location(name: "unknown", url: nil),
+                                       location: Location(name: "Citadel of Ricks", url: URL(string: "https://rickandmortyapi.com/api/location/3")!),
+                                       image: URL(string: "https://rickandmortyapi.com/api/character/avatar/810.jpeg")!,
+                                       episode: [URL(string: "https://rickandmortyapi.com/api/episode/51")!],
+                                       url: URL(string: "https://rickandmortyapi.com/api/character/810")!,
+                                       created: Date(timeIntervalSince1970: TimeInterval(1515608441))
+    )
+    
+#endif
 }
 
 protocol IdentifiableURL {

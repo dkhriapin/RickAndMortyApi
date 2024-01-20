@@ -11,7 +11,12 @@ import SwiftUI
 struct RickAndMortyApiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                CharactersView()
+                    .tabItem { Label("Characters", systemImage: "person.fill") }
+                EpisodesView()
+                    .tabItem { Label("Episodes", systemImage: "film") }
+            }
         }
     }
 }
