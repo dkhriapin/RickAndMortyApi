@@ -71,7 +71,7 @@ struct EpisodesView: View {
             pages = []
             currentPage = 0
         }
-//        .listStyle(.grouped)
+        .listStyle(.grouped)
     }
 }
 

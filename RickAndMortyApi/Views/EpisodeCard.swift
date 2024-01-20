@@ -42,7 +42,7 @@ struct EpisodeCard: View {
                     Text("Staring:")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
-                    Text(episode.characterNames)
+                    Text(episode.cast)
                 }
                 .padding(10)
                 Spacer()

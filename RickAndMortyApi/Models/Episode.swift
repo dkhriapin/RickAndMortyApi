@@ -13,7 +13,7 @@ struct Episode: Decodable {
     let name: String
     let airDate: String
     let episodeCode: String
-    let characters: [URL]
+    let characters: [CharacterURL]
     let url: EpisodeURL
     let created: Date
     
@@ -27,7 +27,7 @@ struct Episode: Decodable {
         case created
     }
     
-    public var characterNames: String {
+    public var cast: String {
         let names = characters.reduce("") { partialResult, characterURL in
             if let char = CharacterCache.shared.getCachedItem(for: characterURL) {
                 return partialResult + "\(char.name), "
