@@ -40,7 +40,7 @@ struct EpisodesView: View {
         .frame(height: 50)
         .task {
             paginationState = .loading
-            let result = await apiService.requestEpisodesPage(currentPage + 1)
+            let result: Result<PageResponse<Episode>, Error> = await apiService.requestPage(currentPage + 1)
             switch result {
             case .success(let page):
                 currentPage += 1

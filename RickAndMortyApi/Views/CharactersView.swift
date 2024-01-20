@@ -39,7 +39,7 @@ struct CharactersView: View {
         .frame(height: 50)
         .task {
             paginationState = .loading
-            let result = await apiService.requestCharactersPage(currentPage + 1)
+            let result: Result<PageResponse<Character>, Error> = await apiService.requestPage(currentPage + 1)
             switch result {
             case .success(let page):
                 currentPage += 1

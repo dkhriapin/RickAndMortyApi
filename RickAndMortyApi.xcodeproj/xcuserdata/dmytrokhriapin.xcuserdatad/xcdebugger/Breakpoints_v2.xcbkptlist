@@ -3,4 +3,54 @@
    uuid = "252AC85D-7B30-4499-B1F5-A790326FD171"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6D677658-F4AA-487B-B505-840EFFF131BE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApi/Models/RickAndMortyAPIService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "requestPage(_:at:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6D677658-F4AA-487B-B505-840EFFF131BE - a42ba3c1a3d9d40f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for RickAndMortyApi.RickAndMortyAPIService.requestPage&lt;&#x3c4;_0_0 where &#x3c4;_0_0: RickAndMortyApi.Cacheable, &#x3c4;_0_0: RickAndMortyApi.SubitemCacheable, &#x3c4;_0_0: Swift.Decodable&gt;(_: Swift.Int, at: Swift.String) async -&gt; Swift.Result&lt;RickAndMortyApi.PageResponse&lt;&#x3c4;_0_0&gt;, Swift.Error&gt;"
+                  moduleName = "RickAndMortyApi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrokhriapin/Playground/RickAndMortyApi/RickAndMortyApi/Models/RickAndMortyAPIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "1796">
+               </Location>
+               <Location
+                  uuid = "6D677658-F4AA-487B-B505-840EFFF131BE - 7503289a5899ba0a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for RickAndMortyApi.RickAndMortyAPIService.requestPage&lt;&#x3c4;_0_0 where &#x3c4;_0_0: RickAndMortyApi.Cacheable, &#x3c4;_0_0: RickAndMortyApi.SubitemCacheable, &#x3c4;_0_0: Swift.Decodable&gt;(_: Swift.Int, at: Swift.String) async -&gt; Swift.Result&lt;RickAndMortyApi.PageResponse&lt;&#x3c4;_0_0&gt;, Swift.Error&gt;"
+                  moduleName = "RickAndMortyApi"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dmytrokhriapin/Playground/RickAndMortyApi/RickAndMortyApi/Models/RickAndMortyAPIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

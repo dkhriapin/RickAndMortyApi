@@ -7,7 +7,29 @@
 
 import Foundation
 
-class Cache<T> {
+//MARK: - Cacheable
+
+protocol Cacheable {
+    var cacheKey: URL { get }
+}
+
+extension Episode: Cacheable {
+    var cacheKey: URL { return self.url }
+}
+
+extension Character: Cacheable {
+    var cacheKey: URL { return self.url }
+}
+
+extension Cacheable {
+    static var cache: Cache<Self> {
+        return Cache<Self>()
+    }
+}
+
+//MARK: - Cache
+
+class Cache<T: Cacheable> {
     private var cache: [URL: T] = [:]
     private let cacheQueue = DispatchQueue(label: "com.dkhriapin.RickAndMortyApi.CacheQueue")
 
