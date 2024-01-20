@@ -61,7 +61,6 @@
 		D15B01E02B59AD8E00BA70D8 = {
 			isa = PBXGroup;
 			children = (
-				D15B02062B5A91C100BA70D8 /* ErrorView.swift */,
 				D15B01EB2B59AD8E00BA70D8 /* RickAndMortyApi */,
 				D15B01EA2B59AD8E00BA70D8 /* Products */,
 			);
@@ -110,6 +109,7 @@
 		D15B02112B5BF86100BA70D8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D15B02062B5A91C100BA70D8 /* ErrorView.swift */,
 				D15B02172B5C7CF400BA70D8 /* PaginatedView.swift */,
 				D15B02192B5C830400BA70D8 /* PaginatedLastRowView.swift */,
 				D15B01EE2B59AD8E00BA70D8 /* CharactersView.swift */,
