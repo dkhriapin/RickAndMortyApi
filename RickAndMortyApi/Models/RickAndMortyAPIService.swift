@@ -50,7 +50,7 @@ class RickAndMortyAPIService {
             let cache = T.cache
             for item in page.results {
                 if cache.getCachedItem(for: item.cacheKey) == nil {
-                    cache.setItem(item, for: item.cacheKey)
+                    cache.setItem(item)
                 }
             }
             //Cache subitems of each item in page results
@@ -80,7 +80,7 @@ class RickAndMortyAPIService {
                         do {
                             let (data, _) = try await URLSession.shared.data(from: subitemURL)
                             let subitem = try self.jsonDecoder.decode(T.Subitem.self, from: data)
-                            cache.setItem(subitem, for: subitemURL)
+                            cache.setItem(subitem)
                         } catch {
                             // No need to handle error here. We can't fetch subitem to cache it - will try another time.
                         }

@@ -26,9 +26,9 @@ class Cache<T: Cacheable> {
         }
     }
 
-    func setItem(_ item: T, for url: URL) {
+    func setItem(_ item: T) {
         cacheQueue.async {
-            self.cache[url] = item
+            self.cache[item.cacheKey] = item
         }
     }
 }

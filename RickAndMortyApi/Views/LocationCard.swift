@@ -51,6 +51,6 @@ struct LocationCard: View {
 }
 
 #Preview {
-    CharacterCache.shared.setItem(Character.Rick, for: Character.Rick.url)
+    CharacterCache.shared.setItem(Character.Rick)
     return LocationCard(location: Location.EarthC137)
 }
