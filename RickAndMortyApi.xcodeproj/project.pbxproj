@@ -28,6 +28,7 @@
 		D1B3B7BA2B5D0C50005F5DC0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7B92B5D0C50005F5DC0 /* Location.swift */; };
 		D1B3B7BC2B5D0EED005F5DC0 /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */; };
 		D1B3B7BE2B5D113A005F5DC0 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */; };
+		D1B3B7C02B5D3039005F5DC0 /* NavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7BF2B5D3039005F5DC0 /* NavigationStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		D1B3B7B92B5D0C50005F5DC0 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
 		D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
+		D1B3B7BF2B5D3039005F5DC0 /* NavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				D15B020A2B5ABF5500BA70D8 /* Cache.swift */,
 				D15B02142B5C77E700BA70D8 /* SubitemCacheable.swift */,
 				D15B021B2B5D087500BA70D8 /* IdentifiableURL.swift */,
+				D1B3B7BF2B5D3039005F5DC0 /* NavigationStackView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				D15B02182B5C7CF400BA70D8 /* PaginatedView.swift in Sources */,
 				D1B3B7BE2B5D113A005F5DC0 /* LocationsView.swift in Sources */,
 				D15B02092B5A93E200BA70D8 /* StatusView.swift in Sources */,
+				D1B3B7C02B5D3039005F5DC0 /* NavigationStackView.swift in Sources */,
 				D15B01EF2B59AD8E00BA70D8 /* CharactersView.swift in Sources */,
 				D15B01ED2B59AD8E00BA70D8 /* RickAndMortyApiApp.swift in Sources */,
 				D15B01FD2B59B0AD00BA70D8 /* Character.swift in Sources */,
@@ -361,6 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RickAndMortyApi/Preview Content\"";
@@ -395,6 +400,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RickAndMortyApi/Preview Content\"";

@@ -9,6 +9,7 @@ import Foundation
 
 
 struct Character: Decodable, Identifiable {
+    
     enum Status: String, Decodable {
         case alive = "Alive"
         case dead = "Dead"
@@ -99,6 +100,19 @@ struct Character: Decodable, Identifiable {
     )
     
 #endif
+}
+
+extension Character: Equatable {
+    static func == (lhs: Character, rhs: Character) -> Bool {
+        return lhs.id == rhs.id && lhs.url == rhs.url
+    }
+}
+
+extension Character: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(url)
+    }
 }
 
 typealias CharacterURL = URL

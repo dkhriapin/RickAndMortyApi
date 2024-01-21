@@ -14,7 +14,7 @@ enum PaginationState {
     case error(Error)
 }
 
-struct PaginatedView<T, CardView: View>: View where T: Identifiable & Pageable, CardView: View {
+struct PaginatedView<T, CardView: View>: View where T: Identifiable & Hashable & Pageable, CardView: View {
     
     let apiService: RickAndMortyAPIService
     let cardView: (T) -> CardView
@@ -31,39 +31,43 @@ struct PaginatedView<T, CardView: View>: View where T: Identifiable & Pageable, 
     
     var body: some View {
         let items: [T] = self.pages.flatMap { $0.results }
-        
-        List {
-            ForEach(items) { item in
-                cardView(item)
-                    .listRowSeparator(.hidden)
-            }
-            if isMoreDataAvailable {
-                PaginatedLastRowView(paginationState: $paginationState)
-                    .task{
-                        paginationState = .loading
-                        let result: Result<PageResponse<T>, Error> = await apiService.requestPage(currentPage + 1)
-                        switch result {
-                        case .success(let page):
-                            currentPage += 1
-                            maxPage = page.info.pages
-                            pages.append(page)
-                            paginationState = .idle
-                        case .failure(let error):
-                            paginationState = .error(error)
+        NavigationStackView {
+            List {
+                ForEach(items) { item in
+                    cardView(item)
+                        .listRowSeparator(.hidden)
+                }
+                if isMoreDataAvailable {
+                    PaginatedLastRowView(paginationState: $paginationState)
+                        .task{
+                            paginationState = .loading
+                            let result: Result<PageResponse<T>, Error> = await apiService.requestPage(currentPage + 1)
+                            switch result {
+                            case .success(let page):
+                                currentPage += 1
+                                maxPage = page.info.pages
+                                pages.append(page)
+                                paginationState = .idle
+                            case .failure(let error):
+                                paginationState = .error(error)
+                            }
                         }
-                    }
+                }
             }
+            .refreshable {
+                pages = []
+                currentPage = 0
+            }
+            .listStyle(.grouped)
         }
-        .refreshable {
-            pages = []
-            currentPage = 0
-        }
-        .listStyle(.grouped)
     }
 }
 
 #Preview("CharacterView") {
-    PaginatedView(apiService: RickAndMortyAPIService(), cardView: { CharacterCard(character: $0) })
+    PaginatedView(apiService: RickAndMortyAPIService(), cardView: { char in
+        CharacterCard(character: char)
+            .background(NavigationLink("", destination: { Text(char.name) }).opacity(0))
+    })
 }
 
 #Preview("EpisodeView") {

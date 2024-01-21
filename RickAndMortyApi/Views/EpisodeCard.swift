@@ -40,11 +40,11 @@ struct EpisodeCard: View {
             .background(cardBackgroundColor)
         }
         .cornerRadius(cornerRadius)
-        .padding()
     }
 }
 
 #Preview {
     CharacterCache.shared.setItem(Character.Rick)
     return EpisodeCard(episode: Episode.pilot)
+        .padding()
 }

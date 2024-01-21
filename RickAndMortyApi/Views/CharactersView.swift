@@ -14,6 +14,7 @@ struct CharactersView: View {
     var body: some View {
         PaginatedView(apiService: apiService, cardView: { character in
             CharacterCard(character: character)
+                .background(NavigationLink("", destination: { Text(character.name) }).opacity(0))
         })
     }
 }

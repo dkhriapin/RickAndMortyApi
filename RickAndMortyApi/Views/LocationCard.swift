@@ -46,11 +46,10 @@ struct LocationCard: View {
             .background(cardBackgroundColor)
         }
         .cornerRadius(cornerRadius)
-        .padding()
     }
 }
 
 #Preview {
     CharacterCache.shared.setItem(Character.Rick)
-    return LocationCard(location: Location.EarthC137)
+    return LocationCard(location: Location.EarthC137).padding()
 }

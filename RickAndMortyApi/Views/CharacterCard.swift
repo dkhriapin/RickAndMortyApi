@@ -62,15 +62,16 @@ struct CharacterCard: View {
             .background(cardBackgroundColor)
         }
         .cornerRadius(cornerRadius)
-        .padding()
     }
 }
 
 #Preview {
     CharacterCard(character: Character.Rick)
+        .padding()
 }
 
 #Preview {
     CharacterCard(character: Character.StanLeeRick)
+        .padding()
 }
 
