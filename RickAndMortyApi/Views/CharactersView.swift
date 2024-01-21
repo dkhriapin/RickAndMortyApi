@@ -10,11 +10,16 @@ import SwiftUI
 
 struct CharactersView: View {
     let apiService: RickAndMortyAPIService
-
+    
     var body: some View {
         PaginatedView(apiService: apiService, cardView: { character in
             CharacterCard(character: character)
-                .background(NavigationLink("", destination: { Text(character.name) }).opacity(0))
+                .background(
+                    NavigationLink("", destination: {
+                        CharacterDetailsView(character: character)
+                    })
+                    .opacity(0)
+                )
         })
     }
 }

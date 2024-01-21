@@ -12,9 +12,6 @@ struct CharacterCard: View {
     @State var character: Character
     @Environment(\.colorScheme) var colorScheme
     
-    private let coverPlaceholderBackgroundColor = Color(red: 0.8, green: 0.8, blue: 0.8)
-    private let coverPlaceholderForegroundColor = Color.gray
-   
     private let imageHeight = 300.0
     private let cornerRadius = 10.0
     
@@ -26,14 +23,7 @@ struct CharacterCard: View {
                 image.resizable()
                     .aspectRatio(1, contentMode: .fit)
             } placeholder: {
-                ZStack{
-                    Image(systemName: "photo")
-                        .resizable()
-                        .padding(10)
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(coverPlaceholderBackgroundColor)
-                        .foregroundColor(coverPlaceholderForegroundColor)
-                }
+                AsyncImagePlaceholder()
             }
             HStack {
                 VStack(alignment: .leading, spacing: 5) {

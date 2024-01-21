@@ -29,7 +29,7 @@ struct EpisodeCard: View {
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     Text(episode.airDate)
-                    Text("Staring:")
+                    Text("Starring:")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     Text(episode.cast)
