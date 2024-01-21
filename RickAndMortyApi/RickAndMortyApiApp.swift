@@ -15,6 +15,8 @@ struct RickAndMortyApiApp: App {
             TabView {
                 CharactersView(apiService: apiService)
                     .tabItem { Label("Characters", systemImage: "person.fill") }
+                LocationsView(apiService: apiService)
+                    .tabItem { Label("Locations", systemImage: "globe") }
                 EpisodesView(apiService: apiService)
                     .tabItem { Label("Episodes", systemImage: "film") }
             }

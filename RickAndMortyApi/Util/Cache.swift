@@ -40,3 +40,7 @@ class EpisodeCache: Cache<Episode> {
 class CharacterCache: Cache<Character> {
     static let shared = CharacterCache()
 }
+
+class LocationCache: Cache<Location> {
+    static let shared = LocationCache()
+}

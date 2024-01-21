@@ -25,6 +25,9 @@
 		D15B02182B5C7CF400BA70D8 /* PaginatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15B02172B5C7CF400BA70D8 /* PaginatedView.swift */; };
 		D15B021A2B5C830400BA70D8 /* PaginatedLastRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15B02192B5C830400BA70D8 /* PaginatedLastRowView.swift */; };
 		D15B021C2B5D087500BA70D8 /* IdentifiableURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15B021B2B5D087500BA70D8 /* IdentifiableURL.swift */; };
+		D1B3B7BA2B5D0C50005F5DC0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7B92B5D0C50005F5DC0 /* Location.swift */; };
+		D1B3B7BC2B5D0EED005F5DC0 /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */; };
+		D1B3B7BE2B5D113A005F5DC0 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		D15B02172B5C7CF400BA70D8 /* PaginatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedView.swift; sourceTree = "<group>"; };
 		D15B02192B5C830400BA70D8 /* PaginatedLastRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedLastRowView.swift; sourceTree = "<group>"; };
 		D15B021B2B5D087500BA70D8 /* IdentifiableURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableURL.swift; sourceTree = "<group>"; };
+		D1B3B7B92B5D0C50005F5DC0 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
+		D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,7 @@
 				D15B02042B5A8A8D00BA70D8 /* PageResponse.swift */,
 				D15B02002B5A653C00BA70D8 /* Episode.swift */,
 				D15B01FC2B59B0AD00BA70D8 /* Character.swift */,
+				D1B3B7B92B5D0C50005F5DC0 /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -115,10 +122,12 @@
 				D15B02172B5C7CF400BA70D8 /* PaginatedView.swift */,
 				D15B02192B5C830400BA70D8 /* PaginatedLastRowView.swift */,
 				D15B01EE2B59AD8E00BA70D8 /* CharactersView.swift */,
-				D15B020C2B5AC52E00BA70D8 /* EpisodesView.swift */,
 				D15B01FE2B59C18200BA70D8 /* CharacterCard.swift */,
-				D15B020E2B5ACA2A00BA70D8 /* EpisodeCard.swift */,
 				D15B02082B5A93E200BA70D8 /* StatusView.swift */,
+				D15B020C2B5AC52E00BA70D8 /* EpisodesView.swift */,
+				D15B020E2B5ACA2A00BA70D8 /* EpisodeCard.swift */,
+				D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */,
+				D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,11 +216,14 @@
 				D15B020D2B5AC52E00BA70D8 /* EpisodesView.swift in Sources */,
 				D15B02152B5C77E700BA70D8 /* SubitemCacheable.swift in Sources */,
 				D15B021C2B5D087500BA70D8 /* IdentifiableURL.swift in Sources */,
+				D1B3B7BC2B5D0EED005F5DC0 /* LocationCard.swift in Sources */,
 				D15B01FF2B59C18200BA70D8 /* CharacterCard.swift in Sources */,
+				D1B3B7BA2B5D0C50005F5DC0 /* Location.swift in Sources */,
 				D15B02052B5A8A8D00BA70D8 /* PageResponse.swift in Sources */,
 				D15B02012B5A653C00BA70D8 /* Episode.swift in Sources */,
 				D15B01FB2B59B07500BA70D8 /* RickAndMortyAPIService.swift in Sources */,
 				D15B02182B5C7CF400BA70D8 /* PaginatedView.swift in Sources */,
+				D1B3B7BE2B5D113A005F5DC0 /* LocationsView.swift in Sources */,
 				D15B02092B5A93E200BA70D8 /* StatusView.swift in Sources */,
 				D15B01EF2B59AD8E00BA70D8 /* CharactersView.swift in Sources */,
 				D15B01ED2B59AD8E00BA70D8 /* RickAndMortyApiApp.swift in Sources */,

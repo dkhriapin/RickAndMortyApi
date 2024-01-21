@@ -11,12 +11,7 @@ import SwiftUI
 struct EpisodeCard: View {
     @State var episode: Episode
     @Environment(\.colorScheme) var colorScheme
-    
-    private let coverPlaceholderBackgroundColor = Color(red: 0.8, green: 0.8, blue: 0.8)
-    private let coverPlaceholderForegroundColor = Color.gray
-   
-
-    private let imageHeight = 300.0
+       
     private let cornerRadius = 10.0
     
     var body: some View {
@@ -50,5 +45,6 @@ struct EpisodeCard: View {
 }
 
 #Preview {
-    EpisodeCard(episode: Episode.pilot)
+    CharacterCache.shared.setItem(Character.Rick, for: Character.Rick.url)
+    return EpisodeCard(episode: Episode.pilot)
 }

@@ -24,6 +24,12 @@ extension Episode: Pageable {
     }
 }
 
+extension Location: Pageable {
+    static var pagePath: String {
+        return "location/"
+    }
+}
+
 class RickAndMortyAPIService {
     private let BASE_URL = "https://rickandmortyapi.com/api/"
     
