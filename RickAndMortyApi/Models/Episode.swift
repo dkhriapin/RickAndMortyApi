@@ -58,3 +58,22 @@ extension EpisodeURL {
         identifier(for: "episode")
     }
 }
+
+extension Episode: Cacheable {
+    static var cache: Cache<Episode> {
+        EpisodeCache.shared
+    }
+    var cacheKey: URL {
+        self.url
+    }
+}
+
+extension Episode: SubitemCacheable {
+    typealias Subitem = Character
+    var subitems: [URL] {
+        return self.characters
+    }
+    var subitemCache: Cache<Subitem> {
+        return CharacterCache.shared
+    }
+}

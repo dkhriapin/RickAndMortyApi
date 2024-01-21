@@ -70,7 +70,7 @@ struct Character: Decodable, Identifiable {
     
 #if DEBUG
     
-    static let rick = Character(id: 1,
+    static let Rick = Character(id: 1,
                                 name: "Rick Sanchez",
                                 status: .alive,
                                 species: "Human",
@@ -101,18 +101,6 @@ struct Character: Decodable, Identifiable {
 #endif
 }
 
-protocol IdentifiableURL {
-    func identifier(for key: String) -> Int?
-}
-
-extension IdentifiableURL where Self == URL {
-    func identifier(for key: String) -> Int? {
-        guard let index = self.pathComponents.firstIndex(of: key), index + 1 < self.pathComponents.count else { return nil }
-        let identifierString = self.pathComponents[index + 1]
-        return Int(identifierString)
-    }
-}
-
 typealias CharacterURL = URL
 
 extension CharacterURL: IdentifiableURL {
@@ -121,5 +109,21 @@ extension CharacterURL: IdentifiableURL {
     }
 }
 
+extension Character: Cacheable {
+    static var cache: Cache<Character> {
+        CharacterCache.shared
+    }
+    var cacheKey: URL {
+        self.url
+    }
+}
 
-
+extension Character: SubitemCacheable {
+    typealias Subitem = Episode
+    var subitems: [URL] {
+        return self.episode
+    }
+    var subitemCache: Cache<Subitem> {
+        return EpisodeCache.shared
+    }
+}

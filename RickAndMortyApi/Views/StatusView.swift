@@ -44,5 +44,9 @@ struct StatusView: View {
 }
 
 #Preview {
-    StatusView(character: Character.rick)
+    VStack(alignment: .leading, spacing: 10.0) {
+        StatusView(character: Character.Rick)
+        StatusView(character: Character.StanLeeRick)
+    }
+    .frame(width: 200, height: 50)
 }

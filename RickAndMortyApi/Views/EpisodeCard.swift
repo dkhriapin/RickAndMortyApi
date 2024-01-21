@@ -22,14 +22,9 @@ struct EpisodeCard: View {
     var body: some View {
         let cardBackgroundColor = colorScheme == .dark ? Color(red: 0.4, green: 0.4, blue: 0.4) : Color(red: 0.8, green: 0.8, blue: 0.8)
         
-        
-        
         VStack(spacing: 0) {
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
-                    #if targetEnvironment(simulator)
-                    Text(String(episode.id))
-                    #endif
                     Text("\(episode.episodeCode): \(episode.name)")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -51,7 +46,6 @@ struct EpisodeCard: View {
         }
         .cornerRadius(cornerRadius)
         .padding()
-        
     }
 }
 
