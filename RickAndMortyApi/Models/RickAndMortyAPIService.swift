@@ -71,7 +71,7 @@ class RickAndMortyAPIService {
     
     private func cacheRelatedSubitems<T: SubitemCacheable>(for item: T) async {
         let subitems = item.subitems
-        let cache = item.subitemCache
+        let cache = T.Subitem.cache
         
         await withTaskGroup(of: Void.self) { group in
             for subitemURL in subitems {

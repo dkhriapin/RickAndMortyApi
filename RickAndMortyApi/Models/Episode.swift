@@ -73,7 +73,4 @@ extension Episode: SubitemCacheable {
     var subitems: [URL] {
         return self.characters
     }
-    var subitemCache: Cache<Subitem> {
-        return CharacterCache.shared
-    }
 }

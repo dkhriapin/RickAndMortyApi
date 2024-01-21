@@ -137,7 +137,4 @@ extension Character: SubitemCacheable {
     var subitems: [URL] {
         return self.episode
     }
-    var subitemCache: Cache<Subitem> {
-        return EpisodeCache.shared
-    }
 }

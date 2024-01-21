@@ -64,7 +64,4 @@ extension Location: SubitemCacheable {
     var subitems: [URL] {
         return self.residents
     }
-    var subitemCache: Cache<Subitem> {
-        return CharacterCache.shared
-    }
 }
