@@ -10,6 +10,11 @@ import SwiftUI
 @main
 struct RickAndMortyApiApp: App {
     let apiService = RickAndMortyAPIService()
+    
+    init() {
+        UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance.init(idiom: .unspecified)
+    }
+    
     var body: some Scene {
         WindowGroup {
             TabView {
