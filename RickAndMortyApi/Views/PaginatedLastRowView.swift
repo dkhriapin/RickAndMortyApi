@@ -29,6 +29,6 @@ struct PaginatedLastRowView: View {
     List {
         PaginatedLastRowView(paginationState: .constant(.loading))
         PaginatedLastRowView(paginationState: .constant(.idle))
-        PaginatedLastRowView(paginationState: .constant(.error(NSError(domain: "Preview", code: 0))))
+        PaginatedLastRowView(paginationState: .constant(.error(.apiError("Preview"))))
     }.listStyle(.grouped)
 }

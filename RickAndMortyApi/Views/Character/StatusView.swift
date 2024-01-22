@@ -25,7 +25,7 @@ struct StatusView: View {
         var statusText: String {
             switch character.status {
             case .alive, .dead:
-                return "\(character.status.rawValue.capitalized) - \(character.species)"
+                return "\(character.status.rawValue.capitalized) - \(character.species.capitalized)"
             case .unknown:
                 return character.species.capitalized
             }
@@ -46,7 +46,10 @@ struct StatusView: View {
 #Preview {
     VStack(alignment: .leading, spacing: 10.0) {
         StatusView(character: Character.Rick)
+        Spacer(minLength: 10)
         StatusView(character: Character.StanLeeRick)
+        Spacer(minLength: 10)
+        StatusView(character: Character.AlanRails)
     }
-    .frame(width: 200, height: 50)
+    .frame(width: 350, height: 50)
 }

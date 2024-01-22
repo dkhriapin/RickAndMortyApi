@@ -18,11 +18,13 @@ struct Character: Decodable, Identifiable {
         var id: String { self.rawValue }
     }
     
-    enum Gender: String, Decodable {
+    enum Gender: String, Decodable, CaseIterable, Identifiable {
         case female = "Female"
         case male = "Male"
         case genderless = "Genderless"
         case unknown
+        
+        var id: String { self.rawValue }
     }
     
     struct Location: Decodable {
@@ -98,6 +100,20 @@ struct Character: Decodable, Identifiable {
                                        image: URL(string: "https://rickandmortyapi.com/api/character/avatar/810.jpeg")!,
                                        episode: [URL(string: "https://rickandmortyapi.com/api/episode/51")!],
                                        url: URL(string: "https://rickandmortyapi.com/api/character/810")!,
+                                       created: Date(timeIntervalSince1970: TimeInterval(1515608441))
+    )
+    
+    static let AlanRails = Character(id: 10,
+                                       name: "Alan Rails",
+                                       status: .dead,
+                                       species: "Human",
+                                       type: "Superhuman (Ghost trains summoner)",
+                                       gender: .male,
+                                       origin: Location(name: "unknown", url: nil),
+                                       location: Location(name: "Worldender's lair", url: URL(string: "https://rickandmortyapi.com/api/location/4")!),
+                                       image: URL(string: "https://rickandmortyapi.com/api/character/avatar/10.jpeg")!,
+                                       episode: [URL(string: "https://rickandmortyapi.com/api/episode/25")!],
+                                       url: URL(string: "https://rickandmortyapi.com/api/character/10")!,
                                        created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
     

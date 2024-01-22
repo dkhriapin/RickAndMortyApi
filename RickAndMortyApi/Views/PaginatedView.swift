@@ -8,10 +8,19 @@
 import SwiftUI
 
 
-enum PaginationState {
+enum PaginationState: Equatable {
     case idle
     case loading
-    case error(Error)
+    case error(PageResponseError)
+    
+    static func == (lhs: PaginationState, rhs: PaginationState) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle): return true
+        case (.loading, .loading): return true
+        case (.error(let lhsError), .error(let rhsError)): return lhsError == rhsError
+        default: return false
+        }
+    }
 }
 
 struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashable & Pageable, CardView: View, U: APIFilter {
@@ -38,11 +47,13 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
         switch result {
         case .success(let page):
             currentPage += 1
-            maxPage = page.info.pages
+            maxPage = page.info?.pages
             pages.append(page)
             paginationState = .idle
-        case .failure(let error):
+        case .failure(let error as PageResponseError):
             paginationState = .error(error)
+        case .failure(let generic):
+            paginationState = .error(.genericError(generic.localizedDescription))
         }
     }
     
@@ -52,7 +63,7 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
     }
     
     var body: some View {
-        let items: [T] = self.pages.flatMap { $0.results }
+        let items: [T] = self.pages.flatMap { $0.results ?? [] }
         ScrollViewReader { proxy in
             List {
                 ForEach(items) { item in
@@ -63,13 +74,16 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
                 if isMoreDataAvailable {
                     PaginatedLastRowView(paginationState: $paginationState)
                         .task {
-                            await loadPage()
+                            if paginationState == .idle {
+                                await loadPage()
+                            }
                         }
                 }
             }
             .scrollDismissesKeyboardImmediately()
             .refreshable {
                 reset()
+                await loadPage()
             }
             .listStyle(.plain)
             .onChange(of: filter) { value in
@@ -78,6 +92,7 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
                         proxy.scrollTo(first)
                     }
                     reset()
+                    await loadPage()
                 }
             }
         }

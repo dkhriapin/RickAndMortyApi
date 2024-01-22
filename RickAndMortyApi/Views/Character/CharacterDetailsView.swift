@@ -26,16 +26,28 @@ struct CharacterDetailsView: View {
                             .fontWeight(.semibold)
                         StatusView(character: character)
                         Spacer()
+                        if !character.type.isEmpty {
+                            Text("Type:")
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                            Text(character.type)
+                        }
+                        Spacer()
+                        Text("Gender:")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        Text(character.gender.rawValue.capitalized)
+                        Spacer()
                             .frame(maxHeight: 5)
                         Text("Last known location:")
-                            .font(.subheadline)
+                            .font(.footnote)
                             .foregroundStyle(.secondary)
-                        Text(character.location.name)
+                        Text(character.location.name.capitalized)
                             .font(.body)
                         Spacer()
                             .frame(maxHeight: 5)
                         Text("Seen in:")
-                            .font(.subheadline)
+                            .font(.footnote)
                             .foregroundStyle(.secondary)
                         ForEach(character.episode, id: \.self) { episodeURL in
                             if let episode = EpisodeCache.shared.getCachedItem(for: episodeURL) {
@@ -68,5 +80,11 @@ struct CharacterDetailsView: View {
 #Preview {
     NavigationStackView {
         CharacterDetailsView(character: Character.StanLeeRick)
+    }
+}
+
+#Preview {
+    NavigationStackView {
+        CharacterDetailsView(character: Character.AlanRails)
     }
 }

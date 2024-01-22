@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ErrorView: View {
-    @State var error: Error
+    @State var error: PageResponseError
     var body: some View {
         VStack {
             Text("⚠️ \(error.localizedDescription)")
@@ -17,5 +17,5 @@ struct ErrorView: View {
 }
 
 #Preview {
-    ErrorView(error: NSError(domain: "Test Error", code: 0, userInfo: nil))
+    ErrorView(error: PageResponseError.invalidURL)
 }

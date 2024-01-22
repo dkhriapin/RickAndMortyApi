@@ -31,12 +31,18 @@ struct CharacterCard: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     StatusView(character: character)
+                    if !character.type.isEmpty {
+                        Text("Type:")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        Text(character.type)
+                    }
                     Spacer()
                         .frame(maxHeight: 5)
                     Text("Last known location:")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
-                    Text(character.location.name)
+                    Text(character.location.name.capitalized)
                     if let firstApperance = character.firstApperance {
                         Spacer()
                             .frame(maxHeight: 5)
@@ -62,6 +68,11 @@ struct CharacterCard: View {
 
 #Preview {
     CharacterCard(character: Character.StanLeeRick)
+        .padding()
+}
+
+#Preview {
+    CharacterCard(character: Character.AlanRails)
         .padding()
 }
 

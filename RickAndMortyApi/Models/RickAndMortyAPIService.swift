@@ -30,6 +30,7 @@ extension Location: Pageable {
     }
 }
 
+
 class RickAndMortyAPIService {
     private let BASE_URL = "https://rickandmortyapi.com/api/"
     
@@ -39,23 +40,34 @@ class RickAndMortyAPIService {
         
     private func requestPage<T: Decodable & Cacheable & SubitemCacheable>(_ page: Int, at path: String, with filter: any APIFilter) async -> Result<PageResponse<T>, Error> {
         guard let url = buildURL(at: path, for: page, with: filter) else {
-            return .failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil))
+            return .failure(PageResponseError.invalidURL)
         }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let page = try self.jsonDecoder.decode(PageResponse<T>.self, from: data)
             
+            if let errorText = page.error {
+                return .failure(PageResponseError.apiError(errorText))
+            }
+                        
+            guard let items = page.results else {
+                //Valid response but no results - return empty PageResponse
+                //Can parse page.error here for details.
+                return .success(PageResponse<T>.getEmptyPageResponse())
+                
+            }
+            
             //Cache items in page results
             let cache = T.cache
-            for item in page.results {
+            for item in items {
                 if cache.getCachedItem(for: item.cacheKey) == nil {
                     cache.setItem(item)
                 }
             }
             //Cache subitems of each item in page results
             await withTaskGroup(of: Void.self) { group in
-                for item in page.results {
+                for item in items {
                     group.addTask {
                         await self.cacheRelatedSubitems(for: item)
                     }
