@@ -26,7 +26,7 @@ struct LocationCard: View {
                         .font(.subheadline)
                     Spacer()
                         .frame(maxHeight: 5)
-                    if location.dimension != "" {
+                    if !location.dimension.isEmpty {
                         Text("Dimension:")
                             .font(.footnote)
                             .foregroundStyle(.secondary)

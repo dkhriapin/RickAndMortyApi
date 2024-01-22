@@ -26,7 +26,6 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
     @State private var pages: [PageResponse<T>] = []
     
     private func reset() {
-        print("reset")
         currentPage = 0
         maxPage = nil
         paginationState = .idle
@@ -34,7 +33,6 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
     }
     
     private func loadPage() async {
-        print("fetch page: \(currentPage + 1)")
         paginationState = .loading
         let result: Result<PageResponse<T>, Error> = await apiService.requestPage(currentPage + 1, with: filter)
         switch result {
@@ -76,7 +74,9 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
             .listStyle(.plain)
             .onChange(of: filter) { value in
                 Task {
-                    proxy.scrollTo(items.first!)
+                    if let first = items.first {
+                        proxy.scrollTo(first)
+                    }
                     reset()
                 }
             }

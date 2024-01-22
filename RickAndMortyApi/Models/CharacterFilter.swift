@@ -14,7 +14,7 @@ struct CharacterFilter: APIFilter {
     
     var queryItems: [URLQueryItem] {
         var items = [URLQueryItem]()
-        if self.name != "" {
+        if !self.name.isEmpty {
             items.append(URLQueryItem(name: "name", value: name))
         }
         if let status = self.status {

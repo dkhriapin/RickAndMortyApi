@@ -32,7 +32,7 @@ struct Episode: Decodable, Identifiable, Hashable {
         var cast = chars.reduce("") { $0 + "\($1.name), " }
         cast = String(cast.dropLast(2)) //Remove last ", "
         if chars.count != self.characters.count { //If not all self.characters were cached
-            cast = cast == "" ? "..." : cast + ", ..."
+            cast = cast.isEmpty ? "..." : cast + ", ..."
         }
         return cast
     }

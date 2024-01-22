@@ -12,21 +12,10 @@ struct CharactersView: View {
     let apiService: RickAndMortyAPIService
     
     @State private var filter = CharacterFilter()
+    @State private var showingFilterSheet = false
     
     var body: some View {
         NavigationStackView {
-            VStack {
-                TextField("Name", text: $filter.name)
-                    .textFieldStyle(.roundedBorder)
-                Picker("Status", selection: $filter.status) {
-                    Text("All").tag(Character.Status?.none)
-                    ForEach(Character.Status.allCases) {
-                        Text($0.rawValue.capitalized).tag($0 as Character.Status?)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            .padding(.horizontal, 20)
             PaginatedView(apiService: apiService, filter: $filter, cardView: { character in
                 CharacterCard(character: character)
                     .background(
@@ -35,6 +24,17 @@ struct CharactersView: View {
                         })
                         .opacity(0)
                     )
+            })
+            .toolbar {
+                Button {
+                    showingFilterSheet.toggle()
+                } label: {
+                    Image(systemName: "line.3.horizontal.decrease")
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .halfSheet(showSheet: $showingFilterSheet, sheetView: {
+                CharacterFilterView(filter: $filter)
             })
         }
     }
