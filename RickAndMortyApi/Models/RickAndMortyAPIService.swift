@@ -33,12 +33,12 @@ extension Location: Pageable {
 class RickAndMortyAPIService {
     private let BASE_URL = "https://rickandmortyapi.com/api/"
     
-    func requestPage<T: Pageable>(_ page: Int) async -> Result<PageResponse<T>, Error> {
-        return await requestPage(page, at: T.pagePath)
+    func requestPage<T: Pageable>(_ page: Int, with filter: any APIFilter) async -> Result<PageResponse<T>, Error> {
+        return await requestPage(page, at: T.pagePath, with: filter)
     }
         
-    private func requestPage<T: Decodable & Cacheable & SubitemCacheable>(_ page: Int, at path: String) async -> Result<PageResponse<T>, Error> {
-        guard let url = buildURL(at: path, for: page) else {
+    private func requestPage<T: Decodable & Cacheable & SubitemCacheable>(_ page: Int, at path: String, with filter: any APIFilter) async -> Result<PageResponse<T>, Error> {
+        guard let url = buildURL(at: path, for: page, with: filter) else {
             return .failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil))
         }
         
@@ -90,9 +90,11 @@ class RickAndMortyAPIService {
         }
     }
     
-    private func buildURL(at path: String, for page: Int) -> URL? {
+    private func buildURL(at path: String, for page: Int, with filter: any APIFilter) -> URL? {
         var components = URLComponents(string: BASE_URL + path)!
-        components.queryItems = [URLQueryItem(name: "page", value: "\(page)")]
+        var queryItems = filter.queryItems
+        queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
+        components.queryItems = queryItems
         return components.url
     }
     

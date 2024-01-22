@@ -11,7 +11,7 @@ struct LocationsView: View {
     let apiService: RickAndMortyAPIService
 
     var body: some View {
-        PaginatedView(apiService: apiService, cardView: { location in
+        PaginatedView(apiService: apiService, filter: .constant(EmptyFilter()), cardView: { location in
             LocationCard(location: location)
         })
     }

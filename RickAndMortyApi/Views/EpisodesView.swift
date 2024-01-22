@@ -12,7 +12,7 @@ struct EpisodesView: View {
     let apiService: RickAndMortyAPIService
 
     var body: some View {
-        PaginatedView(apiService: apiService, cardView: { episode in
+        PaginatedView(apiService: apiService, filter: .constant(EmptyFilter()), cardView: { episode in
             EpisodeCard(episode: episode)
         })
     }

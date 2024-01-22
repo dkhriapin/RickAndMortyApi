@@ -10,10 +10,12 @@ import Foundation
 
 struct Character: Decodable, Identifiable {
     
-    enum Status: String, Decodable {
+    enum Status: String, Decodable, CaseIterable, Identifiable {
         case alive = "Alive"
         case dead = "Dead"
         case unknown
+        
+        var id: String { self.rawValue }
     }
     
     enum Gender: String, Decodable {
