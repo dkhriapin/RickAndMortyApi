@@ -35,18 +35,20 @@ struct Location: Decodable, Identifiable, Hashable {
                                     name: "Earth",
                                     type: "Planet",
                                     dimension: "Dimension C-137",
-                                    residents: [URL(string: "https://rickandmortyapi.com/api/character/1")!, URL(string: "https://rickandmortyapi.com/api/character/2")!],
-                                    url: URL(string: "https://rickandmortyapi.com/api/location/1")!,
+                                    residents: [CharacterURL(string: "https://rickandmortyapi.com/api/character/1"), CharacterURL(string: "https://rickandmortyapi.com/api/character/2")],
+                                    url: LocationURL(string: "https://rickandmortyapi.com/api/location/1"),
                                     created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
 #endif
 }
 
-typealias LocationURL = URL
-
-extension LocationURL {
-    var locationId: Int? {
+class LocationURL: APIURL {
+    private var characterId: Int? {
         identifier(for: "location")
+    }
+    
+    override var apiId: Int? {
+        return characterId
     }
 }
 
@@ -54,14 +56,14 @@ extension Location: Cacheable {
     static var cache: Cache<Location> {
         LocationCache.shared
     }
-    var cacheKey: URL {
+    var cacheKey: APIURL {
         self.url
     }
 }
 
 extension Location: SubitemCacheable {
     typealias Subitem = Character
-    var subitems: [URL] {
+    var subitems: [APIURL] {
         return self.residents
     }
 }

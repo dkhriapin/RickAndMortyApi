@@ -53,7 +53,7 @@ struct CharacterDetailsView: View {
                             if let episode = EpisodeCache.shared.getCachedItem(for: episodeURL) {
                                 Text("\(episode.episodeCode): \(episode.name)")
                             } else {
-                                Text("Episode #\(episodeURL.episodeId!)")
+                                Text("Episode #\(episodeURL.apiId!)")
                             }
                         }
                     }

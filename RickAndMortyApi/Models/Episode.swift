@@ -43,19 +43,21 @@ struct Episode: Decodable, Identifiable, Hashable {
                                name: "Pilot",
                                airDate: "December 2, 2013",
                                episodeCode: "S01E01",
-                               characters: [URL(string: "https://rickandmortyapi.com/api/character/1")!, URL(string: "https://rickandmortyapi.com/api/character/2")!],
-                               url: URL(string: "https://rickandmortyapi.com/api/episode/1")!,
+                               characters: [CharacterURL(string: "https://rickandmortyapi.com/api/character/1"), CharacterURL(string: "https://rickandmortyapi.com/api/character/2")],
+                               url: EpisodeURL(string: "https://rickandmortyapi.com/api/episode/1"),
                                created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
     
 #endif
 }
 
-typealias EpisodeURL = URL
-
-extension EpisodeURL {
-    var episodeId: Int? {
+class EpisodeURL: APIURL {
+    private var characterId: Int? {
         identifier(for: "episode")
+    }
+    
+    override var apiId: Int? {
+        return characterId
     }
 }
 
@@ -63,14 +65,14 @@ extension Episode: Cacheable {
     static var cache: Cache<Episode> {
         EpisodeCache.shared
     }
-    var cacheKey: URL {
+    var cacheKey: APIURL {
         self.url
     }
 }
 
 extension Episode: SubitemCacheable {
     typealias Subitem = Character
-    var subitems: [URL] {
+    var subitems: [APIURL] {
         return self.characters
     }
 }

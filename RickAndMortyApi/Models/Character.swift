@@ -69,7 +69,7 @@ struct Character: Decodable, Identifiable {
     
     public var firstApperance: String? {
         guard let firstEpisodeURL = episode.first else { return nil }
-        guard let firstEpisode = EpisodeCache.shared.getCachedItem(for: firstEpisodeURL) else { return firstEpisodeURL.episodeId.map { "Episode #\($0)" } }
+        guard let firstEpisode = EpisodeCache.shared.getCachedItem(for: firstEpisodeURL) else { return firstEpisodeURL.apiId.map { "Episode #\($0)" } }
         return firstEpisode.name
     }
     
@@ -84,8 +84,8 @@ struct Character: Decodable, Identifiable {
                                 origin: Location(name: "Earth", url: URL(string:"https://rickandmortyapi.com/api/location/1")),
                                 location: Location(name: "Earth", url: URL(string:"https://rickandmortyapi.com/api/location/20")),
                                 image: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!,
-                                episode: [URL(string: "https://rickandmortyapi.com/api/episode/1")!, URL(string: "https://rickandmortyapi.com/api/episode/2")!],
-                                url: URL(string: "https://rickandmortyapi.com/api/character/1")!,
+                                episode: [EpisodeURL(string: "https://rickandmortyapi.com/api/episode/1"), EpisodeURL(string: "https://rickandmortyapi.com/api/episode/2")],
+                                url: CharacterURL(string: "https://rickandmortyapi.com/api/character/1"),
                                 created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
     
@@ -98,8 +98,8 @@ struct Character: Decodable, Identifiable {
                                        origin: Location(name: "unknown", url: nil),
                                        location: Location(name: "Citadel of Ricks", url: URL(string: "https://rickandmortyapi.com/api/location/3")!),
                                        image: URL(string: "https://rickandmortyapi.com/api/character/avatar/810.jpeg")!,
-                                       episode: [URL(string: "https://rickandmortyapi.com/api/episode/51")!],
-                                       url: URL(string: "https://rickandmortyapi.com/api/character/810")!,
+                                       episode: [EpisodeURL(string: "https://rickandmortyapi.com/api/episode/51")],
+                                       url: CharacterURL(string: "https://rickandmortyapi.com/api/character/810"),
                                        created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
     
@@ -112,8 +112,8 @@ struct Character: Decodable, Identifiable {
                                        origin: Location(name: "unknown", url: nil),
                                        location: Location(name: "Worldender's lair", url: URL(string: "https://rickandmortyapi.com/api/location/4")!),
                                        image: URL(string: "https://rickandmortyapi.com/api/character/avatar/10.jpeg")!,
-                                       episode: [URL(string: "https://rickandmortyapi.com/api/episode/25")!],
-                                       url: URL(string: "https://rickandmortyapi.com/api/character/10")!,
+                                       episode: [EpisodeURL(string: "https://rickandmortyapi.com/api/episode/25")],
+                                       url: CharacterURL(string: "https://rickandmortyapi.com/api/character/10"),
                                        created: Date(timeIntervalSince1970: TimeInterval(1515608441))
     )
     
@@ -133,11 +133,13 @@ extension Character: Hashable {
     }
 }
 
-typealias CharacterURL = URL
-
-extension CharacterURL: IdentifiableURL {
-    var characterId: Int? {
+class CharacterURL: APIURL {
+    private var characterId: Int? {
         identifier(for: "character")
+    }
+    
+    override var apiId: Int? {
+        return characterId
     }
 }
 
@@ -145,14 +147,14 @@ extension Character: Cacheable {
     static var cache: Cache<Character> {
         CharacterCache.shared
     }
-    var cacheKey: URL {
+    var cacheKey: APIURL {
         self.url
     }
 }
 
 extension Character: SubitemCacheable {
     typealias Subitem = Episode
-    var subitems: [URL] {
+    var subitems: [APIURL] {
         return self.episode
     }
 }

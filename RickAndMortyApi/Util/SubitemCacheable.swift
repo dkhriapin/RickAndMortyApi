@@ -9,6 +9,6 @@ import Foundation
 
 
 protocol SubitemCacheable {
-    associatedtype Subitem: Cacheable, Decodable
-    var subitems: [URL] { get }
+    associatedtype Subitem: Cacheable, Decodable, Batchable
+    var subitems: [APIURL] { get }
 }

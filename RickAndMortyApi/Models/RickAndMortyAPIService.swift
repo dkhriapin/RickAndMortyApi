@@ -8,31 +8,8 @@
 import Foundation
 import Combine
 
-protocol Pageable: Decodable & Cacheable & SubitemCacheable {
-    static var pagePath: String { get }
-}
-
-extension Character: Pageable {
-    static var pagePath: String {
-        return "character/"
-    }
-}
-
-extension Episode: Pageable {
-    static var pagePath: String {
-        return "episode/"
-    }
-}
-
-extension Location: Pageable {
-    static var pagePath: String {
-        return "location/"
-    }
-}
-
 
 class RickAndMortyAPIService {
-    private let BASE_URL = "https://rickandmortyapi.com/api/"
     
     func requestPage<T: Pageable>(_ page: Int, with filter: any APIFilter) async -> Result<PageResponse<T>, Error> {
         return await requestPage(page, at: T.pagePath, with: filter)
@@ -66,12 +43,8 @@ class RickAndMortyAPIService {
                 }
             }
             //Cache subitems of each item in page results
-            await withTaskGroup(of: Void.self) { group in
-                for item in items {
-                    group.addTask {
-                        await self.cacheRelatedSubitems(for: item)
-                    }
-                }
+            for item in items {
+                await self.cacheRelatedSubitems(for: item) //Subitems are fetched sequentially in order to prevent multiple requests that include same subitems
             }
             
             return .success(page)
@@ -82,28 +55,39 @@ class RickAndMortyAPIService {
     }
     
     private func cacheRelatedSubitems<T: SubitemCacheable>(for item: T) async {
-        let subitems = item.subitems
         let cache = T.Subitem.cache
         
-        await withTaskGroup(of: Void.self) { group in
-            for subitemURL in subitems {
-                group.addTask {
-                    if cache.getCachedItem(for: subitemURL) == nil {
-                        do {
-                            let (data, _) = try await URLSession.shared.data(from: subitemURL)
-                            let subitem = try self.jsonDecoder.decode(T.Subitem.self, from: data)
-                            cache.setItem(subitem)
-                        } catch {
-                            // No need to handle error here. We can't fetch subitem to cache it - will try another time.
-                        }
-                    }
-                }
+        var batchIds = [Int]()
+        for subitemURL in item.subitems {
+            if cache.getCachedItem(for: subitemURL) == nil, let id = subitemURL.apiId {
+                batchIds.append(id)
             }
+        }
+        guard !batchIds.isEmpty else { return }
+        
+        guard let url = buildBatchURL(at: T.Subitem.batchPath, for: batchIds) else {
+            return
+        }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let subitems = try self.jsonDecoder.decode([T.Subitem].self, from: data)
+            for subitem in subitems {
+                cache.setItem(subitem)
+            }
+        } catch {
+            // No need to handle error here. We can't fetch subitem to cache it - will try another time.
         }
     }
     
+    private func buildBatchURL(at path: String, for ids: [Int]) -> URL? {
+        let components = URLComponents(string: Constants.BASE_URL + path)!
+        let idsComponent = ids.map{ String($0) }.joined(separator: ",")
+        return components.url?.appendingPathComponent(idsComponent)
+    }
+    
     private func buildURL(at path: String, for page: Int, with filter: any APIFilter) -> URL? {
-        var components = URLComponents(string: BASE_URL + path)!
+        var components = URLComponents(string: Constants.BASE_URL + path)!
         var queryItems = filter.queryItems
         queryItems.append(URLQueryItem(name: "page", value: "\(page)"))
         components.queryItems = queryItems

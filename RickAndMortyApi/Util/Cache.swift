@@ -10,17 +10,17 @@ import Foundation
 //MARK: - Cacheable
 
 protocol Cacheable {
-    var cacheKey: URL { get }
+    var cacheKey: APIURL { get }
     static var cache: Cache<Self> { get }
 }
 
 //MARK: - Cache
 
 class Cache<T: Cacheable> {
-    private var cache: [URL: T] = [:]
+    private var cache: [APIURL: T] = [:]
     private let cacheQueue = DispatchQueue(label: "com.dkhriapin.RickAndMortyApi.CacheQueue")
 
-    func getCachedItem(for url: URL) -> T? {
+    func getCachedItem(for url: APIURL) -> T? {
         return cacheQueue.sync {
             return cache[url]
         }
