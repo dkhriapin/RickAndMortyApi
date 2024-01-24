@@ -11,13 +11,13 @@ import SwiftUI
 struct LocationsView: View {
     @EnvironmentObject var apiService: RickAndMortyAPIService
     
-    @State private var filter = EmptyFilter()
+    @State private var filter = LocationFilter()
     
     var body: some View {
         FilteredPaginatedView(filter: $filter) { location in
             LocationCard(location: location)
         } filterView: {
-            EmptyView()
+            LocationFilterView(filter: $filter)
         }
     }
 }

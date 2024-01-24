@@ -41,6 +41,10 @@
 		D1B3B7D52B61A425005F5DC0 /* Batchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D42B61A425005F5DC0 /* Batchable.swift */; };
 		D1B3B7D72B61A5FD005F5DC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D62B61A5FD005F5DC0 /* Constants.swift */; };
 		D1B3B7D92B61B411005F5DC0 /* FilteredPaginatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D82B61B411005F5DC0 /* FilteredPaginatedView.swift */; };
+		D1B3B7DB2B61BB18005F5DC0 /* LocationFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7DA2B61BB18005F5DC0 /* LocationFilter.swift */; };
+		D1B3B7DD2B61BB9C005F5DC0 /* EpisodeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7DC2B61BB9C005F5DC0 /* EpisodeFilter.swift */; };
+		D1B3B7DF2B61BC7E005F5DC0 /* LocationFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7DE2B61BC7E005F5DC0 /* LocationFilterView.swift */; };
+		D1B3B7E22B61BE0E005F5DC0 /* EpisodeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7E12B61BE0E005F5DC0 /* EpisodeFilterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +83,10 @@
 		D1B3B7D42B61A425005F5DC0 /* Batchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Batchable.swift; sourceTree = "<group>"; };
 		D1B3B7D62B61A5FD005F5DC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D1B3B7D82B61B411005F5DC0 /* FilteredPaginatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredPaginatedView.swift; sourceTree = "<group>"; };
+		D1B3B7DA2B61BB18005F5DC0 /* LocationFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFilter.swift; sourceTree = "<group>"; };
+		D1B3B7DC2B61BB9C005F5DC0 /* EpisodeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeFilter.swift; sourceTree = "<group>"; };
+		D1B3B7DE2B61BC7E005F5DC0 /* LocationFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFilterView.swift; sourceTree = "<group>"; };
+		D1B3B7E12B61BE0E005F5DC0 /* EpisodeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeFilterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,14 +141,16 @@
 			isa = PBXGroup;
 			children = (
 				D15B01FA2B59B07500BA70D8 /* RickAndMortyAPIService.swift */,
-				D15B02042B5A8A8D00BA70D8 /* PageResponse.swift */,
-				D15B02002B5A653C00BA70D8 /* Episode.swift */,
-				D15B01FC2B59B0AD00BA70D8 /* Character.swift */,
-				D1B3B7B92B5D0C50005F5DC0 /* Location.swift */,
-				D1B3B7C92B5E8D4F005F5DC0 /* APIFilter.swift */,
-				D1B3B7C52B5E58C3005F5DC0 /* CharacterFilter.swift */,
 				D1B3B7D22B61A408005F5DC0 /* Pageable.swift */,
 				D1B3B7D42B61A425005F5DC0 /* Batchable.swift */,
+				D15B02042B5A8A8D00BA70D8 /* PageResponse.swift */,
+				D15B01FC2B59B0AD00BA70D8 /* Character.swift */,
+				D1B3B7B92B5D0C50005F5DC0 /* Location.swift */,
+				D15B02002B5A653C00BA70D8 /* Episode.swift */,
+				D1B3B7C92B5E8D4F005F5DC0 /* APIFilter.swift */,
+				D1B3B7C52B5E58C3005F5DC0 /* CharacterFilter.swift */,
+				D1B3B7DA2B61BB18005F5DC0 /* LocationFilter.swift */,
+				D1B3B7DC2B61BB9C005F5DC0 /* EpisodeFilter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,14 +159,12 @@
 			isa = PBXGroup;
 			children = (
 				D1B3B7D12B5EAAE1005F5DC0 /* Character */,
-				D15B02062B5A91C100BA70D8 /* ErrorView.swift */,
+				D1B3B7E02B61BCF1005F5DC0 /* Location */,
+				D1B3B7E32B61BE87005F5DC0 /* Episode */,
 				D15B02172B5C7CF400BA70D8 /* PaginatedView.swift */,
 				D1B3B7D82B61B411005F5DC0 /* FilteredPaginatedView.swift */,
 				D15B02192B5C830400BA70D8 /* PaginatedLastRowView.swift */,
-				D15B020C2B5AC52E00BA70D8 /* EpisodesView.swift */,
-				D15B020E2B5ACA2A00BA70D8 /* EpisodeCard.swift */,
-				D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */,
-				D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */,
+				D15B02062B5A91C100BA70D8 /* ErrorView.swift */,
 				D1B3B7C32B5D3CAE005F5DC0 /* AsyncImagePlaceholder.swift */,
 			);
 			path = Views;
@@ -187,6 +195,26 @@
 				D15B02082B5A93E200BA70D8 /* StatusView.swift */,
 			);
 			path = Character;
+			sourceTree = "<group>";
+		};
+		D1B3B7E02B61BCF1005F5DC0 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				D1B3B7BD2B5D113A005F5DC0 /* LocationsView.swift */,
+				D1B3B7BB2B5D0EED005F5DC0 /* LocationCard.swift */,
+				D1B3B7DE2B61BC7E005F5DC0 /* LocationFilterView.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		D1B3B7E32B61BE87005F5DC0 /* Episode */ = {
+			isa = PBXGroup;
+			children = (
+				D15B020C2B5AC52E00BA70D8 /* EpisodesView.swift */,
+				D15B020E2B5ACA2A00BA70D8 /* EpisodeCard.swift */,
+				D1B3B7E12B61BE0E005F5DC0 /* EpisodeFilterView.swift */,
+			);
+			path = Episode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +300,7 @@
 				D15B01FF2B59C18200BA70D8 /* CharacterCard.swift in Sources */,
 				D1B3B7BA2B5D0C50005F5DC0 /* Location.swift in Sources */,
 				D15B02052B5A8A8D00BA70D8 /* PageResponse.swift in Sources */,
+				D1B3B7DD2B61BB9C005F5DC0 /* EpisodeFilter.swift in Sources */,
 				D1B3B7D92B61B411005F5DC0 /* FilteredPaginatedView.swift in Sources */,
 				D15B02012B5A653C00BA70D8 /* Episode.swift in Sources */,
 				D15B01FB2B59B07500BA70D8 /* RickAndMortyAPIService.swift in Sources */,
@@ -280,7 +309,10 @@
 				D1B3B7CA2B5E8D4F005F5DC0 /* APIFilter.swift in Sources */,
 				D1B3B7CC2B5E99A6005F5DC0 /* CharacterFilterView.swift in Sources */,
 				D1B3B7BE2B5D113A005F5DC0 /* LocationsView.swift in Sources */,
+				D1B3B7DB2B61BB18005F5DC0 /* LocationFilter.swift in Sources */,
 				D15B02092B5A93E200BA70D8 /* StatusView.swift in Sources */,
+				D1B3B7E22B61BE0E005F5DC0 /* EpisodeFilterView.swift in Sources */,
+				D1B3B7DF2B61BC7E005F5DC0 /* LocationFilterView.swift in Sources */,
 				D1B3B7D02B5EA87D005F5DC0 /* TextField+ShowClearButton.swift in Sources */,
 				D1B3B7C02B5D3039005F5DC0 /* NavigationStackView.swift in Sources */,
 				D15B01EF2B59AD8E00BA70D8 /* CharactersView.swift in Sources */,
