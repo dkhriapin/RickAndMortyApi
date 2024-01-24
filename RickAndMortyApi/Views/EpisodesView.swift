@@ -9,15 +9,20 @@ import SwiftUI
 
 
 struct EpisodesView: View {
-    let apiService: RickAndMortyAPIService
-
+    @EnvironmentObject var apiService: RickAndMortyAPIService
+    
+    @State private var filter = EmptyFilter()
+    
     var body: some View {
-        PaginatedView(apiService: apiService, filter: .constant(EmptyFilter()), cardView: { episode in
+        FilteredPaginatedView(filter: $filter) { episode in
             EpisodeCard(episode: episode)
-        })
+        } filterView: {
+            EmptyView()
+        }
     }
 }
 
 #Preview {
-    EpisodesView(apiService: RickAndMortyAPIService())
+    EpisodesView()
+        .environmentObject(RickAndMortyAPIService())
 }

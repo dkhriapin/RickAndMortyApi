@@ -40,6 +40,7 @@
 		D1B3B7D32B61A408005F5DC0 /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D22B61A408005F5DC0 /* Pageable.swift */; };
 		D1B3B7D52B61A425005F5DC0 /* Batchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D42B61A425005F5DC0 /* Batchable.swift */; };
 		D1B3B7D72B61A5FD005F5DC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D62B61A5FD005F5DC0 /* Constants.swift */; };
+		D1B3B7D92B61B411005F5DC0 /* FilteredPaginatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B3B7D82B61B411005F5DC0 /* FilteredPaginatedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		D1B3B7D22B61A408005F5DC0 /* Pageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pageable.swift; sourceTree = "<group>"; };
 		D1B3B7D42B61A425005F5DC0 /* Batchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Batchable.swift; sourceTree = "<group>"; };
 		D1B3B7D62B61A5FD005F5DC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D1B3B7D82B61B411005F5DC0 /* FilteredPaginatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredPaginatedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				D1B3B7D12B5EAAE1005F5DC0 /* Character */,
 				D15B02062B5A91C100BA70D8 /* ErrorView.swift */,
 				D15B02172B5C7CF400BA70D8 /* PaginatedView.swift */,
+				D1B3B7D82B61B411005F5DC0 /* FilteredPaginatedView.swift */,
 				D15B02192B5C830400BA70D8 /* PaginatedLastRowView.swift */,
 				D15B020C2B5AC52E00BA70D8 /* EpisodesView.swift */,
 				D15B020E2B5ACA2A00BA70D8 /* EpisodeCard.swift */,
@@ -269,6 +272,7 @@
 				D15B01FF2B59C18200BA70D8 /* CharacterCard.swift in Sources */,
 				D1B3B7BA2B5D0C50005F5DC0 /* Location.swift in Sources */,
 				D15B02052B5A8A8D00BA70D8 /* PageResponse.swift in Sources */,
+				D1B3B7D92B61B411005F5DC0 /* FilteredPaginatedView.swift in Sources */,
 				D15B02012B5A653C00BA70D8 /* Episode.swift in Sources */,
 				D15B01FB2B59B07500BA70D8 /* RickAndMortyAPIService.swift in Sources */,
 				D1B3B7C42B5D3CAE005F5DC0 /* AsyncImagePlaceholder.swift in Sources */,

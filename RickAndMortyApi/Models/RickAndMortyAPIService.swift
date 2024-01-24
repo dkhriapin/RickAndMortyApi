@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-class RickAndMortyAPIService {
+class RickAndMortyAPIService: ObservableObject {
     
     func requestPage<T: Pageable>(_ page: Int, with filter: any APIFilter) async -> Result<PageResponse<T>, Error> {
         return await requestPage(page, at: T.pagePath, with: filter)

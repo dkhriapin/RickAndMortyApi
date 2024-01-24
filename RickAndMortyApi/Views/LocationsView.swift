@@ -7,16 +7,22 @@
 
 import SwiftUI
 
-struct LocationsView: View {
-    let apiService: RickAndMortyAPIService
 
+struct LocationsView: View {
+    @EnvironmentObject var apiService: RickAndMortyAPIService
+    
+    @State private var filter = EmptyFilter()
+    
     var body: some View {
-        PaginatedView(apiService: apiService, filter: .constant(EmptyFilter()), cardView: { location in
+        FilteredPaginatedView(filter: $filter) { location in
             LocationCard(location: location)
-        })
+        } filterView: {
+            EmptyView()
+        }
     }
 }
 
 #Preview {
-    LocationsView(apiService: RickAndMortyAPIService())
+    LocationsView()
+        .environmentObject(RickAndMortyAPIService())
 }

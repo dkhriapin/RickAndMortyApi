@@ -18,13 +18,14 @@ struct RickAndMortyApiApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                CharactersView(apiService: apiService)
+                CharactersView()
                     .tabItem { Label("Characters", systemImage: "person.fill") }
-                LocationsView(apiService: apiService)
+                LocationsView()
                     .tabItem { Label("Locations", systemImage: "globe") }
-                EpisodesView(apiService: apiService)
+                EpisodesView()
                     .tabItem { Label("Episodes", systemImage: "film") }
             }
+            .environmentObject(apiService)
         }
     }
 }

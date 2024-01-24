@@ -23,16 +23,16 @@ enum PaginationState: Equatable {
     }
 }
 
-struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashable & Pageable, CardView: View, U: APIFilter {
+struct PaginatedView<Item, CardView: View, Filter>: View where Item: Identifiable & Hashable & Pageable, CardView: View, Filter: APIFilter {
     
-    let apiService: RickAndMortyAPIService
-    @Binding var filter: U
-    let cardView: (T) -> CardView
+    @EnvironmentObject var apiService: RickAndMortyAPIService
+    @Binding var filter: Filter
+    let cardView: (Item) -> CardView
     
     @State private var currentPage: Int = 0
     @State private var maxPage: Int?
     @State private var paginationState: PaginationState = .idle
-    @State private var pages: [PageResponse<T>] = []
+    @State private var pages: [PageResponse<Item>] = []
     
     private func reset() {
         currentPage = 0
@@ -43,7 +43,7 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
     
     private func loadPage() async {
         paginationState = .loading
-        let result: Result<PageResponse<T>, Error> = await apiService.requestPage(currentPage + 1, with: filter)
+        let result: Result<PageResponse<Item>, Error> = await apiService.requestPage(currentPage + 1, with: filter)
         switch result {
         case .success(let page):
             currentPage += 1
@@ -63,7 +63,7 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
     }
     
     var body: some View {
-        let items: [T] = self.pages.flatMap { $0.results ?? [] }
+        let items: [Item] = self.pages.flatMap { $0.results ?? [] }
         ScrollViewReader { proxy in
             List {
                 ForEach(items) { item in
@@ -100,12 +100,13 @@ struct PaginatedView<T, CardView: View, U>: View where T: Identifiable & Hashabl
 }
 
 #Preview("CharacterView") {
-    PaginatedView(apiService: RickAndMortyAPIService(), filter: .constant(CharacterFilter()), cardView: { char in
+    PaginatedView(filter: .constant(CharacterFilter()), cardView: { char in
         CharacterCard(character: char)
             .background(NavigationLink("", destination: { Text(char.name) }).opacity(0))
-    })
+    }).environmentObject(RickAndMortyAPIService())
 }
 
 #Preview("EpisodeView") {
-    PaginatedView(apiService: RickAndMortyAPIService(), filter: .constant(CharacterFilter()), cardView: { EpisodeCard(episode: $0) })
+    PaginatedView(filter: .constant(CharacterFilter()), cardView: { EpisodeCard(episode: $0) })
+        .environmentObject(RickAndMortyAPIService())
 }
